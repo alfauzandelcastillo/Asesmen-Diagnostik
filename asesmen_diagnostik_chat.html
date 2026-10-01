@@ -1,0 +1,2584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asesmen Diagnostik Non-Kognitif SMA | Chat Simulasi</title>
+  <!-- Google Fonts: Quicksand & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Pastel Palette */
+      --mint: #86e3ce;
+      --mint-light: #e8f9f4;
+      --mint-dark: #3ba88e;
+      
+      --pink: #ffb8ca;
+      --pink-light: #fef0f4;
+      --pink-dark: #d85c7b;
+      
+      --blue: #a0c4ff;
+      --blue-light: #edf4fe;
+      --blue-dark: #4d7cc7;
+      
+      --yellow: #fded96;
+      --yellow-light: #fffdeb;
+      --yellow-dark: #b89814;
+      
+      --lavender: #d0bfff;
+      --lavender-light: #f6f2ff;
+      
+      /* Neutrals & UI */
+      --bg-page: #f8fafc;
+      --text-main: #2d3748;
+      --text-muted: #718096;
+      --border-soft: #e2e8f0;
+      --white: #ffffff;
+      
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.09);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Poppins', 'Quicksand', sans-serif;
+      color: var(--text-main);
+      background: linear-gradient(135deg, #f3f8fd 0%, #fff7fb 50%, #f4fbf7 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Container Utilities */
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.35s ease-out forwards;
+      width: 100%;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================
+       1. HALAMAN DEPAN (MENU UTAMA)
+       ======================================================== */
+    .hero-wrapper {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 50px 40px;
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--lavender-light);
+      color: #6941c6;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      margin-bottom: 20px;
+      border: 1px solid rgba(208, 191, 255, 0.6);
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 4.5vw, 42px);
+      font-weight: 700;
+      color: #1a202c;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--mint-dark) 0%, #2b6cb0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(17px, 2.4vw, 21px);
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+
+    .hero-features {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .feature-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: #f8fafc;
+      border: 1px solid var(--border-soft);
+      color: #4a5568;
+    }
+
+    /* 2 Tombol Besar Utama */
+    .main-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      .main-buttons-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-card {
+        padding: 35px 20px;
+      }
+    }
+
+    .btn-action-big {
+      position: relative;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: var(--shadow-md);
+      text-decoration: none;
+      overflow: hidden;
+    }
+
+    .btn-action-big:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-action-big:active {
+      transform: translateY(0);
+    }
+
+    .btn-student {
+      background: linear-gradient(145deg, #a7f3d0 0%, #6ee7b7 100%);
+      color: #064e3b;
+      border: 2px solid #34d399;
+    }
+
+    .btn-student .btn-icon {
+      background: rgba(255, 255, 255, 0.7);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-teacher {
+      background: linear-gradient(145deg, #fbcfe8 0%, #f472b6 100%);
+      color: #831843;
+      border: 2px solid #f472b6;
+    }
+
+    .btn-teacher .btn-icon {
+      background: rgba(255, 255, 255, 0.7);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-label-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      margin-bottom: 4px;
+    }
+
+    .btn-label-sub {
+      font-size: 13px;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* ========================================================
+       2. MODAL VERIFIKASI PIN GURU
+       ======================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .pin-modal-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      position: relative;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .pin-icon-wrap {
+      width: 64px;
+      height: 64px;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+    }
+
+    .pin-inputs-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 24px 0 20px;
+    }
+
+    .pin-digit-box {
+      width: 52px;
+      height: 60px;
+      border: 2px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+      background: #f8fafc;
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+
+    .pin-digit-box:focus {
+      outline: none;
+      border-color: var(--pink-dark);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.2);
+    }
+
+    .pin-error-msg {
+      color: #e53e3e;
+      font-size: 13px;
+      font-weight: 500;
+      height: 20px;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    .pin-error-msg.show {
+      display: block;
+      animation: shake 0.35s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .pin-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .modal-btn-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 12px 18px;
+      border: 1px solid var(--border-soft);
+      background: #f8fafc;
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #edf2f7;
+    }
+
+    .btn-primary-pin {
+      flex: 1;
+      padding: 12px 18px;
+      border: none;
+      background: var(--pink-dark);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary-pin:hover {
+      background: #be185d;
+    }
+
+    /* ========================================================
+       3. ALUR SISWA: INPUT DATA DIRI
+       ======================================================== */
+    .student-setup-card {
+      max-width: 520px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-soft);
+      text-align: center;
+    }
+
+    .avatar-welcome {
+      width: 76px;
+      height: 76px;
+      background: var(--mint-light);
+      color: var(--mint-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      margin: 0 auto 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 1.5px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      background: #f9fafb;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--mint-dark);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+    }
+
+    .btn-start-chat {
+      width: 100%;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, var(--mint-dark) 0%, #10b981 100%);
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.28);
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+
+    .btn-start-chat:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(16, 185, 129, 0.35);
+    }
+
+    /* ========================================================
+       4. SIMULASI CHAT (SMARTPHONE MOCKUP)
+       ======================================================== */
+    .chat-view-container {
+      max-width: 480px;
+      margin: 15px auto 30px;
+      padding: 0 12px;
+    }
+
+    .phone-mockup {
+      background: #ffffff;
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.18), 0 0 0 10px #24292f;
+      display: flex;
+      flex-direction: column;
+      height: 88vh;
+      max-height: 840px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #333;
+    }
+
+    /* Phone Speaker & Notch */
+    .phone-notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 18px;
+      background: #18191c;
+      border-radius: 12px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .notch-camera {
+      width: 9px;
+      height: 9px;
+      background: #2b303c;
+      border-radius: 50%;
+    }
+
+    .notch-speaker {
+      width: 40px;
+      height: 4px;
+      background: #373e4d;
+      border-radius: 3px;
+    }
+
+    /* Chat App Header */
+    .chat-header {
+      background: linear-gradient(135deg, #a7f3d0 0%, #bae6fd 100%);
+      padding: 34px 18px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 20;
+    }
+
+    .btn-chat-back {
+      background: rgba(255, 255, 255, 0.6);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      color: #1f2937;
+      transition: all 0.2s;
+    }
+
+    .btn-chat-back:hover {
+      background: var(--white);
+    }
+
+    .chat-header-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .status-dot {
+      width: 11px;
+      height: 11px;
+      background: #10b981;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    .chat-header-info {
+      flex: 1;
+    }
+
+    .chat-header-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.2;
+    }
+
+    .chat-header-status {
+      font-size: 12px;
+      color: #065f46;
+      font-weight: 500;
+    }
+
+    /* Progress aspect info inside chat */
+    .chat-progress-wrap {
+      background: #f8fafc;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .progress-bar-bg {
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #3b82f6);
+      width: 4%;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .aspect-badge {
+      background: #e0f2fe;
+      color: #0284c7;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    /* Chat Messages Stream Area */
+    .chat-messages-area {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background: #fbfbfe;
+      background-image: radial-gradient(#e5e7eb 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-behavior: smooth;
+    }
+
+    .msg-row {
+      display: flex;
+      width: 100%;
+      animation: msgSlide 0.3s ease-out;
+    }
+
+    @keyframes msgSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg-incoming {
+      justify-content: flex-start;
+    }
+
+    .msg-outgoing {
+      justify-content: flex-end;
+    }
+
+    .bubble {
+      max-width: 82%;
+      padding: 12px 16px;
+      font-size: 14px;
+      line-height: 1.45;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      word-break: break-word;
+    }
+
+    .bubble-incoming {
+      background: var(--white);
+      color: #1f2937;
+      border-radius: 18px 18px 18px 4px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .bubble-outgoing {
+      background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+      color: #064e3b;
+      font-weight: 500;
+      border-radius: 18px 18px 4px 18px;
+    }
+
+    .msg-time {
+      font-size: 10px;
+      opacity: 0.65;
+      margin-top: 4px;
+      text-align: right;
+      display: block;
+    }
+
+    /* Typing indicator */
+    .typing-bubble {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 10px 14px;
+      width: fit-content;
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .typing-dot {
+      width: 7px;
+      height: 7px;
+      background: #9ca3af;
+      border-radius: 50%;
+      animation: bounceDot 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounceDot {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+
+    /* Chat Options / Response Tray */
+    .chat-options-tray {
+      background: #ffffff;
+      border-top: 1px solid #f1f5f9;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 250px;
+      overflow-y: auto;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .options-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+      padding-left: 4px;
+    }
+
+    .btn-option {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 13px;
+      color: #1f2937;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.35;
+      transition: all 0.2s;
+    }
+
+    .btn-option:hover {
+      background: #eef2ff;
+      border-color: #a5b4fc;
+      transform: translateX(4px);
+    }
+
+    .opt-letter {
+      background: #e2e8f0;
+      color: #4b5563;
+      font-weight: 700;
+      font-size: 11px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .btn-option:hover .opt-letter {
+      background: #6366f1;
+      color: #ffffff;
+    }
+
+    /* ========================================================
+       5. HASIL PENYELESAIAN SISWA (KARTU KARAKTER)
+       ======================================================== */
+    .result-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      max-width: 650px;
+      margin: 40px auto;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .result-badge {
+      font-size: 13px;
+      font-weight: 700;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .conclusion-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 28px 0;
+      text-align: left;
+    }
+
+    .conclusion-box {
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      border-left: 5px solid;
+    }
+
+    .box-gaya {
+      background: #f0fdf4;
+      border-color: #22c55e;
+    }
+
+    .box-minat {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
+    .box-rumah {
+      background: #fffbeb;
+      border-color: #f59e0b;
+    }
+
+    .conclusion-title {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .conclusion-value {
+      font-size: 15px;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .conclusion-detail {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ========================================================
+       6. HALAMAN REKAP JAWABAN SISWA (PORTAL GURU)
+       ======================================================== */
+    .dashboard-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 20px 0;
+      margin-bottom: 30px;
+    }
+
+    .dash-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .dash-title-group h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .dash-title-group p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .dash-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-dash {
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border-soft);
+      background: var(--white);
+      color: #334155;
+      transition: all 0.2s;
+    }
+
+    .btn-dash:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .btn-dash-primary {
+      background: var(--mint-dark);
+      border-color: var(--mint-dark);
+      color: var(--white);
+    }
+
+    .btn-dash-primary:hover {
+      background: #2d8c75;
+      border-color: #2d8c75;
+    }
+
+    /* Stats Overview */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .stat-val {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+
+    .stat-lbl {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Filters Bar */
+    .filter-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-input-wrap {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .select-filter {
+      padding: 10px 14px;
+      border: 1.5px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 13px;
+      background: #f8fafc;
+      color: #334155;
+    }
+
+    /* Rekap Table */
+    .table-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table.rekap-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    table.rekap-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 700;
+      padding: 14px 16px;
+      border-bottom: 1.5px solid var(--border-soft);
+      white-space: nowrap;
+    }
+
+    table.rekap-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-soft);
+      vertical-align: top;
+    }
+
+    table.rekap-table tbody tr:hover {
+      background: #fafafa;
+    }
+
+    .student-badge-name {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 14px;
+    }
+
+    .student-badge-class {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: #e2e8f0;
+      color: #334155;
+      margin-top: 3px;
+    }
+
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tag-visual { background: #dcfce7; color: #166534; }
+    .tag-auditori { background: #fef3c7; color: #92400e; }
+    .tag-audiovisual { background: #e0e7ff; color: #3730a3; }
+    .tag-kinestetik { background: #fee2e2; color: #991b1b; }
+
+    .tag-blue { background: #e0f2fe; color: #0369a1; }
+    .tag-yellow { background: #fef9c3; color: #854d0e; }
+    .tag-pink { background: #fce7f3; color: #9d174d; }
+
+    .summary-text-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+
+    /* Modal Detail 25 Jawaban */
+    .detail-modal-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .detail-modal-header {
+      padding: 20px 24px;
+      background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .detail-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .answer-item-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin-bottom: 12px;
+    }
+
+    .answer-aspect-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .answer-q-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .answer-picked {
+      font-size: 13px;
+      color: #047857;
+      font-weight: 600;
+      background: #ecfdf5;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border-left: 3px solid #10b981;
+    }
+
+    /* Print styling */
+    @media print {
+      body {
+        background: #fff;
+      }
+      .dashboard-header, .filter-card, .dash-actions, .hero-wrapper {
+        display: none !important;
+      }
+      .table-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================
+       VIEW 1: HALAMAN DEPAN (MENU UTAMA)
+       ========================================================== -->
+  <section id="view-landing" class="view-section active">
+    <div class="container hero-wrapper">
+      <div class="hero-card">
+        <div class="hero-badge">
+          <span>✨</span> SMA • Bahasa Indonesia Kurikulum Merdeka
+        </div>
+        
+        <h1 class="hero-title">
+          Asesmen Diagnostik <span>Non-Kognitif</span>
+        </h1>
+        
+        <h2 class="hero-subtitle">
+          "Kenali Dirimu Lewat Chat" 💬
+        </h2>
+        
+        <p class="hero-desc">
+          Mari luangkan waktu sejenak untuk mengobrol santai bersama asisten belajar. Temukan gaya belajar, potensi minat, dan gambaran keseharian belajarmu dengan cara yang seru dan menyenangkan!
+        </p>
+
+        <div class="hero-features">
+          <div class="feature-chip">💬 Simulasi Chat Interaktif</div>
+          <div class="feature-chip">🎯 25 Pertanyaan Diagnostik</div>
+          <div class="feature-chip">📊 Rekap Otomatis untuk Guru</div>
+          <div class="feature-chip">🔒 Akses Guru Ber-PIN</div>
+        </div>
+
+        <!-- 2 Tombol Utama -->
+        <div class="main-buttons-grid">
+          <!-- TOMBOL SISWA -->
+          <button id="btn-open-student" class="btn-action-big btn-student" onclick="showStudentSetup()">
+            <div class="btn-icon">💬</div>
+            <div class="btn-label-title">TOMBOL SISWA</div>
+            <div class="btn-label-sub">Mulai Obrolan Simulasi Chat</div>
+          </button>
+
+          <!-- TOMBOL GURU -->
+          <button id="btn-open-teacher" class="btn-action-big btn-teacher" onclick="openPinModal()">
+            <div class="btn-icon">🔒</div>
+            <div class="btn-label-title">TOMBOL GURU</div>
+            <div class="btn-label-sub">Lihat Rekap Jawaban Siswa</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       VIEW 2: ALUR SISWA - INPUT IDENTITAS
+       ========================================================== -->
+  <section id="view-student-setup" class="view-section">
+    <div class="container">
+      <div class="student-setup-card">
+        <div class="avatar-welcome">👋</div>
+        <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 6px;">Yuk, Kenalan Dulu!</h2>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">
+          Isi nama dan kelasmu untuk memulai obrolan simulasi bersama asisten belajar.
+        </p>
+
+        <form id="student-form" onsubmit="startChatSimulation(event)">
+          <div class="form-group">
+            <label class="form-label" for="student-name">Nama Lengkapmu</label>
+            <input type="text" id="student-name" class="form-input" placeholder="Contoh: Ananda Pratama" required autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="student-class">Kelas</label>
+            <input type="text" id="student-class" class="form-input" placeholder="Contoh: X-A atau XI Merdeka 2" required autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn-start-chat">
+            Mulai Chatting Sekarang 🚀
+          </button>
+          
+          <button type="button" class="btn-secondary" style="width: 100%; margin-top: 10px;" onclick="goToLanding()">
+            Kembali ke Menu Utama
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       VIEW 3: SIMULASI CHAT (MOCKUP SMARTPHONE)
+       ========================================================== -->
+  <section id="view-student-chat" class="view-section">
+    <div class="chat-view-container">
+      <div class="phone-mockup">
+        <!-- Speaker & Notch -->
+        <div class="phone-notch">
+          <div class="notch-camera"></div>
+          <div class="notch-speaker"></div>
+        </div>
+
+        <!-- Chat Header -->
+        <div class="chat-header">
+          <button class="btn-chat-back" onclick="confirmExitChat()" title="Kembali">✕</button>
+          <div class="chat-header-avatar">
+            👩‍🏫
+            <div class="status-dot"></div>
+          </div>
+          <div class="chat-header-info">
+            <div class="chat-header-name">Bu Guru • Asisten Belajar</div>
+            <div class="chat-header-status" id="chat-status-text">Online • Mendengarkanmu</div>
+          </div>
+        </div>
+
+        <!-- Progress aspect & bar -->
+        <div class="chat-progress-wrap">
+          <div class="progress-text-row">
+            <span id="chat-aspect-label" class="aspect-badge">Aspek 1: Kesejahteraan Emosional</span>
+            <span id="chat-counter-label">Pertanyaan 1 / 25</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="chat-progress-fill" class="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div id="chat-messages-area" class="chat-messages-area">
+          <!-- Pesan chat akan di-render di sini secara dinamis -->
+        </div>
+
+        <!-- Options Tray (Jawaban Siswa) -->
+        <div id="chat-options-tray" class="chat-options-tray">
+          <div class="options-label">Pilih balasanmu:</div>
+          <div id="options-buttons-container">
+            <!-- Pilihan A, B, C, D diisi JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       VIEW 4: HASIL / KARTU KARAKTER SISWA SETELAH SELESAI
+       ========================================================== -->
+  <section id="view-student-result" class="view-section">
+    <div class="container">
+      <div class="result-card">
+        <div class="result-badge">🎉 Asesmen Berhasil Diselesaikan!</div>
+        <h2 style="font-size: 26px; font-weight: 700; margin-bottom: 8px;">Terima Kasih, <span id="res-student-name">Siswa</span>!</h2>
+        <p style="color: var(--text-muted); font-size: 14px; max-width: 520px; margin: 0 auto;">
+          Jawabanmu sudah otomatis terkirim dan tersimpan ke rekap Bapak/Ibu Guru. Berikut adalah gambaran ringkas profil belajarmu:
+        </p>
+
+        <div class="conclusion-grid">
+          <div class="conclusion-box box-gaya">
+            <div class="conclusion-title">
+              <span>🎨</span> Gaya Belajar Dominan
+            </div>
+            <div class="conclusion-value" id="res-gaya-belajar">-</div>
+            <div class="conclusion-detail" id="res-gaya-desc">Metode belajar yang paling nyaman untukmu.</div>
+          </div>
+
+          <div class="conclusion-box box-minat">
+            <div class="conclusion-title">
+              <span>🌟</span> Minat, Bakat & Karya
+            </div>
+            <div class="conclusion-value" id="res-minat-bakat">-</div>
+            <div class="conclusion-detail" id="res-minat-desc">Bentuk tugas dan topik yang paling membuatmu bersemangat.</div>
+          </div>
+
+          <div class="conclusion-box box-rumah">
+            <div class="conclusion-title">
+              <span>🏡</span> Aktivitas Belajar di Rumah
+            </div>
+            <div class="conclusion-value" id="res-aktivitas-rumah">-</div>
+            <div class="conclusion-detail" id="res-rumah-desc">Karakteristik kebiasaan dan fasilitas belajarmu di rumah.</div>
+          </div>
+        </div>
+
+        <button class="btn-start-chat" style="max-width: 280px; margin: 0 auto; display: block;" onclick="goToLanding()">
+          Kembali ke Beranda
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       VIEW 5: PORTAL GURU (REKAP JAWABAN SISWA)
+       ========================================================== -->
+  <section id="view-teacher-dashboard" class="view-section">
+    <header class="dashboard-header">
+      <div class="container dash-nav">
+        <div class="dash-title-group">
+          <h1>📊 Rekapitulasi Asesmen Diagnostik Siswa</h1>
+          <p>Portal Hasil Diagnostik Non-Kognitif SMA (Mata Pelajaran Bahasa Indonesia)</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn-dash" onclick="exportToCSV()">
+            📥 Unduh Excel / CSV
+          </button>
+          <button class="btn-dash" onclick="window.print()">
+            🖨️ Cetak PDF
+          </button>
+          <button class="btn-dash" onclick="loadSampleDataPrompt()">
+            🧪 Tambah Contoh Data
+          </button>
+          <button class="btn-dash btn-dash-primary" onclick="goToLanding()">
+            🏠 Menu Utama
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Overview Statistics -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #e0f2fe; color: #0284c7;">👥</div>
+          <div>
+            <div class="stat-val" id="stat-total-students">0</div>
+            <div class="stat-lbl">Total Siswa Terdata</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">🎨</div>
+          <div>
+            <div class="stat-val" id="stat-top-learning-style" style="font-size: 18px;">-</div>
+            <div class="stat-lbl">Gaya Belajar Terbanyak</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #fef3c7; color: #d97706;">😊</div>
+          <div>
+            <div class="stat-val" id="stat-wellbeing" style="font-size: 18px;">-</div>
+            <div class="stat-lbl">Kondisi Kesejahteraan Emosi</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #f3e8ff; color: #9333ea;">🏡</div>
+          <div>
+            <div class="stat-val" id="stat-support" style="font-size: 18px;">-</div>
+            <div class="stat-lbl">Dukungan Belajar di Rumah</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-card">
+        <div class="search-input-wrap">
+          <input type="text" id="filter-search" class="form-input" style="padding: 10px 14px; font-size: 13px;" placeholder="🔍 Cari nama siswa..." oninput="renderRekapTable()">
+        </div>
+        <select id="filter-class" class="select-filter" onchange="renderRekapTable()">
+          <option value="ALL">Semua Kelas</option>
+        </select>
+        <select id="filter-style" class="select-filter" onchange="renderRekapTable()">
+          <option value="ALL">Semua Gaya Belajar</option>
+          <option value="Visual Teks">Visual Teks</option>
+          <option value="Auditori">Auditori</option>
+          <option value="Audio-Visual">Audio-Visual</option>
+          <option value="Kinestetik">Kinestetik</option>
+        </select>
+        <button class="btn-dash" style="color: #ef4444;" onclick="clearAllDataPrompt()">
+          🗑️ Hapus Semua Data
+        </button>
+      </div>
+
+      <!-- Tabel Rekap Jawaban Siswa -->
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="rekap-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">No</th>
+                <th style="min-width: 170px;">Nama Siswa & Kelas</th>
+                <th style="min-width: 200px;">[Gaya Belajar]</th>
+                <th style="min-width: 230px;">[Minat & Bakat]</th>
+                <th style="min-width: 230px;">[Aktivitas Belajar di Rumah]</th>
+                <th style="width: 100px; text-align: center;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="rekap-table-body">
+              <!-- Baris data di-generate via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       MODAL 1: VERIFIKASI PIN GURU (PIN = 55555)
+       ========================================================== -->
+  <div id="modal-pin-verify" class="modal-overlay">
+    <div class="pin-modal-card">
+      <div class="pin-icon-wrap">🔒</div>
+      <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">Verifikasi PIN Guru</h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+        Masukkan 5-digit PIN khusus guru untuk membuka rekapitulasi data jawaban siswa.
+      </p>
+
+      <div class="pin-inputs-group">
+        <input type="password" maxlength="1" class="pin-digit-box" data-idx="0" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-digit-box" data-idx="1" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-digit-box" data-idx="2" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-digit-box" data-idx="3" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-digit-box" data-idx="4" inputmode="numeric">
+      </div>
+
+      <div id="pin-error-alert" class="pin-error-msg">PIN salah! Silakan coba lagi.</div>
+      <div class="pin-hint">💡 Catatan Guru: PIN default adalah <b>55555</b></div>
+
+      <div class="modal-btn-row">
+        <button type="button" class="btn-secondary" onclick="closePinModal()">Batal</button>
+        <button type="button" class="btn-primary-pin" onclick="checkEnteredPin()">Verifikasi Masuk</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       MODAL 2: DETAIL 25 JAWABAN SISWA
+       ========================================================== -->
+  <div id="modal-student-detail" class="modal-overlay">
+    <div class="detail-modal-card">
+      <div class="detail-modal-header">
+        <div>
+          <h3 id="modal-detail-student-name" style="font-size: 18px; font-weight: 700;">Detail Jawaban Siswa</h3>
+          <p id="modal-detail-student-class" style="font-size: 12px; color: var(--text-muted);">Kelas X-A</p>
+        </div>
+        <button class="btn-chat-back" onclick="closeDetailModal()">✕</button>
+      </div>
+
+      <div id="modal-detail-body" class="detail-modal-body">
+        <!-- Render 25 butir soal dan jawaban siswa -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       LOGIKA & KONTEN 25 PERTANYAAN ASESMEN (JAVASCRIPT)
+       ========================================================== -->
+  <script>
+    /* ==========================================================
+       DATABASE KONTEN 25 PERTANYAAN (5 ASPEK)
+       ========================================================== */
+    const QUESTIONS = [
+      // Aspek 1: KESEJAHTERAAN PSIKOLOGIS, EMOSIONAL, DAN SOSIAL MURID (1-5)
+      {
+        id: 1,
+        aspek: "Kesejahteraan Psikologis & Emosional",
+        text: "Bagaimana perasaan umum yang paling mendominasi dirimu saat berangkat ke sekolah atau memulai pembelajaran hari ini?",
+        options: [
+          { key: "a", text: "Sangat bersemangat, gembira, dan siap belajar.", tag: "Emosi Positif Tinggi" },
+          { key: "b", text: "Biasa saja dan siap mengikuti aktivitas kelas.", tag: "Emosi Netral/Stabil" },
+          { key: "c", text: "Cemas, khawatir, atau merasa tertekan.", tag: "Butuh Pendampingan" },
+          { key: "d", text: "Sangat lelah, mengantuk, atau kurang berenergi.", tag: "Kurang Energi" }
+        ]
+      },
+      {
+        id: 2,
+        aspek: "Kesejahteraan Psikologis & Emosional",
+        text: "Bagaimana perasaanmu ketika diminta untuk menyampaikan pendapat atau tampil berbicara di depan kelas?",
+        options: [
+          { key: "a", text: "Sangat percaya diri dan antusias membagikan pemikiran.", tag: "Sangat Percaya Diri" },
+          { key: "b", text: "Agak gugup, tetapi tetap bisa melaluinya dengan baik.", tag: "Cukup Percaya Diri" },
+          { key: "c", text: "Sangat cemas dan berusaha semaksimal mungkin untuk menghindar.", tag: "Kecemasan Sosial" },
+          { key: "d", text: "Malu dan ragu, tetapi mau mencoba jika ditunjuk oleh guru.", tag: "Perlu Dorongan" }
+        ]
+      },
+      {
+        id: 3,
+        aspek: "Kesejahteraan Psikologis & Emosional",
+        text: "Bagaimana respons emosionalmu saat menghadapi materi pelajaran atau tugas Bahasa Indonesia yang terasa sulit?",
+        options: [
+          { key: "a", text: "Penasaran dan makin tertantang untuk menyelesaikannya.", tag: "Resiliensi Tinggi" },
+          { key: "b", text: "Tetap tenang dan berinisiatif mencari bantuan teman atau guru.", tag: "Kolaboratif/Tenang" },
+          { key: "c", text: "Mudah merasa stres, frustrasi, atau ingin menyerah.", tag: "Rentan Frustrasi" },
+          { key: "d", text: "Bingung dan memilih untuk menunggu jawaban atau arahan teman.", tag: "Pasif/Tergantung" }
+        ]
+      },
+      {
+        id: 4,
+        aspek: "Kesejahteraan Sosial di Kelas",
+        text: "Secara umum, bagaimana kamu merasakan suasana pertemananmu di dalam kelas saat ini?",
+        options: [
+          { key: "a", text: "Merasa sangat diterima, dihargai, dan dirangkul oleh semua teman.", tag: "Iklim Sosial Sangat Positif" },
+          { key: "b", text: "Memiliki beberapa teman dekat yang selalu mendukung dan saling bantu.", tag: "Memiliki Support System" },
+          { key: "c", text: "Merasa canggung dan kurang cocok dengan mayoritas teman kelas.", tag: "Kurang Nyaman Sosial" },
+          { key: "d", text: "Merasa tersisih atau sering merasa sendirian di kelas.", tag: "Risiko Terisolasi" }
+        ]
+      },
+      {
+        id: 5,
+        aspek: "Kesejahteraan Psikologis & Emosional",
+        text: "Bagaimana tingkat kenyamanan emosionalmu selama mengikuti jam pelajaran Bahasa Indonesia?",
+        options: [
+          { key: "a", text: "Sangat senang, rileks, dan menikmati setiap aktivitasnya.", tag: "Sangat Nyaman" },
+          { key: "b", text: "Cukup nyaman dan bisa mengikuti pembelajaran dengan baik.", tag: "Cukup Nyaman" },
+          { key: "c", text: "Merasa agak tegang atau terbebani dengan tugas-tugasnya.", tag: "Merasa Terbebani" },
+          { key: "d", text: "Merasa bosan dan sulit untuk fokus selama jam pelajaran.", tag: "Bosan/Kurang Fokus" }
+        ]
+      },
+
+      // Aspek 2: AKTIVITAS BELAJAR DI RUMAH (6-10)
+      {
+        id: 6,
+        aspek: "Aktivitas Belajar di Rumah",
+        text: "Berapa rata-rata alokasi waktu yang kamu gunakan untuk membaca buku atau belajar di rumah setiap hari?",
+        options: [
+          { key: "a", text: "Lebih dari 2 jam sehari.", tag: "Durasi Tinggi (>2 Jam)" },
+          { key: "b", text: "Antara 1 hingga 2 jam sehari.", tag: "Durasi Sedang (1-2 Jam)" },
+          { key: "c", text: "Kurang dari 1 jam sehari.", tag: "Durasi Minim (<1 Jam)" },
+          { key: "d", text: "Hanya belajar/membaca jika ada PR atau akan menghadapi ulangan.", tag: "Insidental / Saat Ujian" }
+        ]
+      },
+      {
+        id: 7,
+        aspek: "Aktivitas Belajar di Rumah",
+        text: "Bagaimana kebiasaanmu dalam mengatur jadwal dan waktu belajar mandiri di rumah?",
+        options: [
+          { key: "a", text: "Memiliki jadwal belajar teratur dan disiplin melakukannya setiap hari.", tag: "Teratur & Disiplin" },
+          { key: "b", text: "Belajar secara fleksibel jika ada waktu luang setelah beristirahat.", tag: "Fleksibel" },
+          { key: "c", text: "Sering menunda waktu belajar hingga larut malam.", tag: "Prokrastinasi" },
+          { key: "d", text: "Tidak pernah membuat jadwal dan belajar hanya saat diperintah orang tua.", tag: "Perlu Pengawasan" }
+        ]
+      },
+      {
+        id: 8,
+        aspek: "Aktivitas Belajar di Rumah",
+        text: "Apa yang paling sering kamu lakukan jika mengalami kesulitan saat pengerjaan tugas Bahasa Indonesia di rumah?",
+        options: [
+          { key: "a", text: "Mencari referensi mandiri di internet, buku, atau mesin pencari.", tag: "Riset Mandiri" },
+          { key: "b", text: "Bertanya kepada teman melalui pesan singkat/diskusi kelompok online.", tag: "Tanya Teman" },
+          { key: "c", text: "Bertanya dan meminta bantuan anggota keluarga di rumah.", tag: "Bantuan Keluarga" },
+          { key: "d", text: "Membiarkan tugas tersebut tidak selesai dan menanyakannya di sekolah.", tag: "Menunggu di Sekolah" }
+        ]
+      },
+      {
+        id: 9,
+        aspek: "Aktivitas Belajar di Rumah",
+        text: "Media atau teknologi apa yang paling sering kamu manfaatkan untuk mendukung aktivitas belajar di rumah?",
+        options: [
+          { key: "a", text: "Smartphone/Laptop pribadi dengan koneksi internet yang lancar.", tag: "Perangkat Digital Mandiri" },
+          { key: "b", text: "Perangkat yang digunakan bergantian dengan anggota keluarga lain.", tag: "Perangkat Bergantian" },
+          { key: "c", text: "Buku cetak paket, modul pembelajaran, atau materi pustaka.", tag: "Buku Cetak Fisik" },
+          { key: "d", text: "Hanya mengandalkan buku catatan hasil tulisan di kelas.", tag: "Catatan Kelas Sahaja" }
+        ]
+      },
+      {
+        id: 10,
+        aspek: "Aktivitas Belajar di Rumah",
+        text: "Seberapa sering kamu membaca ulang materi Bahasa Indonesia yang telah dipelajari di sekolah?",
+        options: [
+          { key: "a", text: "Selalu mengulang dan merangkumnya setiap malam.", tag: "Sangat Rutin Mengulang" },
+          { key: "b", text: "Kadang-kadang mengulang jika materi dirasa cukup sulit.", tag: "Kala Materi Sulit" },
+          { key: "c", text: "Jarang mengulang, hanya membaca cepat sebelum kelas dimulai.", tag: "Jarang Mengulang" },
+          { key: "d", text: "Tidak pernah mengulang pelajaran sama sekali di rumah.", tag: "Tidak Pernah Mengulang" }
+        ]
+      },
+
+      // Aspek 3: KONDISI KEADAAN KELUARGA & LINGKUNGAN RUMAH (11-15)
+      {
+        id: 11,
+        aspek: "Kondisi Lingkungan Rumah",
+        text: "Siapa yang paling sering mendampingi atau membantumu saat belajar di rumah?",
+        options: [
+          { key: "a", text: "Orang tua (Ayah/Ibu) atau kakak/saudara.", tag: "Didampingi Keluarga" },
+          { key: "b", text: "Guru les privat atau tutor bimbingan belajar.", tag: "Didampingi Tutor Les" },
+          { key: "c", text: "Teman sebaya yang datang atau belajar kelompok di rumah.", tag: "Belajar Bersama Teman" },
+          { key: "d", text: "Belajar mandiri tanpa pendampingan siapa pun.", tag: "Belajar Mandiri Sepenuhnya" }
+        ]
+      },
+      {
+        id: 12,
+        aspek: "Kondisi Lingkungan Rumah",
+        text: "Bagaimana kondisi tempat atau fasilitas belajar yang kamu gunakan di rumah?",
+        options: [
+          { key: "a", text: "Memiliki meja/ruang belajar khusus yang sangat tenang dan nyaman.", tag: "Ruang Khusus Tenang" },
+          { key: "b", text: "Ada tempat belajar, namun harus bergantian/berbagi ruang dengan keluarga.", tag: "Berbagi Ruang" },
+          { key: "c", text: "Ruang belajar kurang nyaman/berisik, tetapi masih bisa digunakan.", tag: "Kurang Nyaman/Berisik" },
+          { key: "d", text: "Tidak memiliki tempat khusus, belajar di mana saja yang memungkinkan.", tag: "Fasilitas Fleksibel/Terbatas" }
+        ]
+      },
+      {
+        id: 13,
+        aspek: "Kondisi Lingkungan Rumah",
+        text: "Bagaimana bentuk perhatian atau dukungan orang tua/keluarga terhadap kegiatan belajarmu?",
+        options: [
+          { key: "a", text: "Sangat mendukung dan rutin menanyakan perkembangan belajar di sekolah.", tag: "Dukungan Sangat Tinggi" },
+          { key: "b", text: "Mendukung dan membantu menyediakan fasilitas belajar jika diminta.", tag: "Dukungan Fasilitas" },
+          { key: "c", text: "Kurang memperhatikan kegiatan belajar karena kesibukan kerja.", tag: "Perhatian Terbatas" },
+          { key: "d", text: "Menyerahkan sepenuhnya urusan belajar kepada saya tanpa pernah bertanya.", tag: "Dilepas Mandiri" }
+        ]
+      },
+      {
+        id: 14,
+        aspek: "Kondisi Lingkungan Rumah",
+        text: "Bagaimana ketersediaan akses sarana penunjang (buku bacaan/perangkat digital) di rumahmu?",
+        options: [
+          { key: "a", text: "Sangat lengkap (memiliki koleksi buku dan perangkat pribadi yang memadai).", tag: "Sarana Sangat Lengkap" },
+          { key: "b", text: "Cukup memadai untuk kebutuhan belajar sehari-hari.", tag: "Sarana Memadai" },
+          { key: "c", text: "Terbatas, namun berusaha dimaksimalkan sebaik mungkin.", tag: "Sarana Terbatas" },
+          { key: "d", text: "Sangat minim dan sering mengalami kendala akses.", tag: "Sarana Sangat Minim" }
+        ]
+      },
+      {
+        id: 15,
+        aspek: "Kondisi Lingkungan Rumah",
+        text: "Seberapa terbuka kamu menceritakan kendala atau pengalaman belajarmu di sekolah kepada orang tua?",
+        options: [
+          { key: "a", text: "Sangat terbuka, rutin berdiskusi tentang suka dan duka di sekolah.", tag: "Komunikasi Sangat Terbuka" },
+          { key: "b", text: "Menceritakan hal-hal penting atau saat mengalami nilai kurang baik saja.", tag: "Komunikasi Cukup" },
+          { key: "c", text: "Jarang bercerita kecuali jika ditanya terlebih dahulu oleh orang tua.", tag: "Komunikasi Pasif" },
+          { key: "d", text: "Tidak pernah menceritakan urusan sekolah kepada orang tua.", tag: "Tertutup" }
+        ]
+      },
+
+      // Aspek 4: LATAR BELAKANG PERGAULAN & INTERAKSI SOSIAL (16-20)
+      {
+        id: 16,
+        aspek: "Interaksi Sosial & Pergaulan",
+        text: "Bagaimana kamu mendeskripsikan pola interaksi sosialmu dengan teman-teman di sekolah?",
+        options: [
+          { key: "a", text: "Sangat terbuka dan bisa berteman akrab dengan siapa saja tanpa membeda-bedakan.", tag: "Sangat Terbuka / Ekstrover" },
+          { key: "b", text: "Lebih suka berkumpul dengan kelompok kecil berisi 2–4 teman dekat saja.", tag: "Kelompok Selektif" },
+          { key: "c", text: "Cenderung pasif, hanya berinteraksi jika ada teman yang menyapa terlebih dahulu.", tag: "Pasif Sosial" },
+          { key: "d", text: "Lebih nyaman menyendiri dan berfokus pada aktivitas pribadi.", tag: "Soliter / Introvert" }
+        ]
+      },
+      {
+        id: 17,
+        aspek: "Interaksi Sosial & Pergaulan",
+        text: "Dalam kegiatan kerja kelompok Bahasa Indonesia, peran mana yang paling membuatmu merasa nyaman?",
+        options: [
+          { key: "a", text: "Ketua/koordinator yang membagi tugas dan mengarahkan kelompok.", tag: "Pemimpin / Koordinator" },
+          { key: "b", text: "Pencatat/sekretaris yang merangkum ide-ide hasil diskusi.", tag: "Sekretaris / Perangkum" },
+          { key: "c", text: "Juru bicara/presenter yang menyampaikan hasil karya di depan kelas.", tag: "Presenter / Juru Bicara" },
+          { key: "d", text: "Anggota aktif yang fokus mencari referensi dan menyusun materi.", tag: "Riset & Eksekutor" }
+        ]
+      },
+      {
+        id: 18,
+        aspek: "Interaksi Sosial & Pergaulan",
+        text: "Bagaimana caramu merespons jika terjadi perbedaan pendapat saat berdiskusi kelompok?",
+        options: [
+          { key: "a", text: "Mendengarkan semua pendapat dan aktif mencari jalan tengah/kompromi.", tag: "Kompromis & Demokratis" },
+          { key: "b", text: "Mengikuti pendapat suara terbanyak agar diskusi cepat selesai.", tag: "Konformis / Suara Terbanyak" },
+          { key: "c", text: "Memilih diam dan mengalah daripada menimbulkan perdebatan.", tag: "Menghindari Konflik" },
+          { key: "d", text: "Mempertahankan argumen pribadi karena merasa pendapat saya yang paling benar.", tag: "Asertif Keras" }
+        ]
+      },
+      {
+        id: 19,
+        aspek: "Interaksi Sosial & Pergaulan",
+        text: "Seberapa sering kamu membahas atau menceritakan topik menarik (seperti buku, film, musik, atau konten media sosial) bersama teman-temanmu?",
+        options: [
+          { key: "a", text: "Sangat sering, hampir setiap ada waktu luang di sekolah.", tag: "Sangat Sering Berbagi Ide" },
+          { key: "b", text: "Kadang-kadang, jika topik pembicaraannya relevan dan seru.", tag: "Cukup Berbagi" },
+          { key: "c", text: "Jarang, kami lebih sering membicarakan hal lain.", tag: "Jarang Diskusi Topik" },
+          { key: "d", text: "Tidak pernah membahas hal-hal tersebut dengan teman.", tag: "Tidak Pernah" }
+        ]
+      },
+      {
+        id: 20,
+        aspek: "Interaksi Sosial & Pergaulan",
+        text: "Sikap apa yang biasanya kamu tunjukkan jika melihat teman sekelasmu mengalami kesulitan belajar?",
+        options: [
+          { key: "a", text: "Proaktif menawarkan bantuan atau menjelaskan materi kepadanya.", tag: "Altruis & Proaktif Membantu" },
+          { key: "b", text: "Senang hati membantu jika teman tersebut datang dan meminta bantuan.", tag: "Membantu Jika Diminta" },
+          { key: "c", text: "Diam saja karena merasa kemampuan diri sendiri juga masih terbatas.", tag: "Ragu/Fokus Sendiri" },
+          { key: "d", text: "Membiarkan saja, karena setiap orang bertanggung jawab atas tugasnya.", tag: "Individualis" }
+        ]
+      },
+
+      // Aspek 5: KARAKTER, MINAT, DAN GAYA BELAJAR BAHASA INDONESIA (21-25)
+      {
+        id: 21,
+        aspek: "Karakter, Minat & Gaya Belajar",
+        text: "Metode penyampaian materi seperti apa yang paling membuatmu cepat memahami pelajaran Bahasa Indonesia?",
+        options: [
+          { key: "a", text: "Visual Teks: Membaca modul, ringkasan materi, infografis, atau bagan secara mandiri.", style: "Visual Teks" },
+          { key: "b", text: "Auditori: Mendengarkan penjelasan guru secara langsung, ceramah interaktif, atau podcast.", style: "Auditori" },
+          { key: "c", text: "Audio-Visual: Menonton tayangan video pembelajaran, slide presentasi menarik, atau film pendek.", style: "Audio-Visual" },
+          { key: "d", text: "Kinestetik: Melakukan praktik langsung, bermain peran (role play), atau simulasi di depan kelas.", style: "Kinestetik" }
+        ]
+      },
+      {
+        id: 22,
+        aspek: "Karakter, Minat & Gaya Belajar",
+        text: "Jika guru memberikan tugas pembuatan karya Bahasa Indonesia, format tugas mana yang paling ingin kamu pilih?",
+        options: [
+          { key: "a", text: "Karya Tulis: Cerita pendek (cerpen), puisi, esai, atau artikel opini.", format: "Karya Tulis Kreatif" },
+          { key: "b", text: "Karya Lisan: Pidato, rekaman podcast, cerita lisan (storytelling), atau wawancara.", format: "Karya Lisan / Podcast" },
+          { key: "c", text: "Karya Visual: Poster edukatif, komik digital, infografis, atau peta konsep.", format: "Karya Visual / Infografis" },
+          { key: "d", text: "Karya Audio-Visual: Video pendek, vlog pembelajaran, atau drama singkat.", format: "Karya Video & Drama" }
+        ]
+      },
+      {
+        id: 23,
+        aspek: "Karakter, Minat & Gaya Belajar",
+        text: "Topik atau tema pembahasan seperti apa yang paling memotivasi dan menarik minat bacamu?",
+        options: [
+          { key: "a", text: "Teknologi, inovasi digital, kecerdasan buatan, atau sains populer.", topic: "Teknologi & Digital" },
+          { key: "b", text: "Isu sosial, kebudayaan, seni, drama, atau tren hiburan.", topic: "Sosial, Budaya & Seni" },
+          { key: "c", text: "Cerita fiksi, petualangan, misteri, atau karya sastra klasik.", topic: "Fiksi & Sastra Kreatif" },
+          { key: "d", text: "Isu lingkungan hidup, alam, petualangan luar ruangan, atau gaya hidup sehat.", topic: "Lingkungan & Alam" }
+        ]
+      },
+      {
+        id: 24,
+        aspek: "Karakter, Minat & Gaya Belajar",
+        text: "Aktivitas pembelajaran Bahasa Indonesia mana yang menurutmu paling menyenangkan dilakukan di kelas?",
+        options: [
+          { key: "a", text: "Membaca cerita/puisi dan menganalisis makna tersirat di dalamnya.", activity: "Apresiasi Sastra" },
+          { key: "b", text: "Menulis karya kreatif sesuai dengan imajinasi atau ide gagasan pribadi.", activity: "Menulis Imajinatif" },
+          { key: "c", text: "Berdiskusi, berdebat secara sehat, atau bertukar ide mengenai topik hangat.", activity: "Debat & Diskusi Ide" },
+          { key: "d", text: "Mengkritisi isi berita, konten media sosial, atau iklan yang beredar di masyarakat.", activity: "Kritis Media Digital" }
+        ]
+      },
+      {
+        id: 25,
+        aspek: "Karakter, Minat & Gaya Belajar",
+        text: "Bagaimana karakter atau kebiasaanmu dalam menyelesaikan tugas proyek/karya Bahasa Indonesia?",
+        options: [
+          { key: "a", text: "Bersemangat sejak awal dan langsung membuat draf perencanaannya.", habit: "Proaktif Sejak Awal" },
+          { key: "b", text: "Mengerjakan secara bertahap dan terstruktur sesuai petunjuk guru.", habit: "Terstruktur Bertahap" },
+          { key: "c", text: "Cenderung menunda-nunda dan baru mengerjakan saat mendekati batas waktu (deadline).", habit: "Menjelang Deadline" },
+          { key: "d", text: "Merasa terbebani di awal sehingga butuh bimbingan atau arahan langkah demi langkah dari guru.", habit: "Butuh Bimbingan Intensif" }
+        ]
+      }
+    ];
+
+    /* ==========================================================
+       STATE APLIKASI
+       ========================================================== */
+    const STORAGE_KEY = "asesmen_diagnostik_sma_data";
+    const TEACHER_PIN = "55555"; // Sesuai aturan: PIN tersembunyi 5-digit
+
+    let currentStudent = {
+      name: "",
+      class: "",
+      answers: {} // { 1: 'a', 2: 'b', ... }
+    };
+
+    let currentQuestionIndex = 0;
+    let isTyping = false;
+
+    /* Web Audio Sound Synthesizer (Efek Pop Chat Ringan) */
+    function playChatSound(isOutgoing = false) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        const now = ctx.currentTime;
+        if (isOutgoing) {
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(780, now + 0.08);
+        } else {
+          osc.frequency.setValueAtTime(420, now);
+          osc.frequency.exponentialRampToValueAtTime(320, now + 0.08);
+        }
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.09);
+        osc.start(now);
+        osc.stop(now + 0.1);
+      } catch (e) {
+        // Abaikan jika browser membatasi autoplay
+      }
+    }
+
+    /* ==========================================================
+       NAVIGASI VIEW
+       ========================================================== */
+    function switchView(viewId) {
+      document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
+      const target = document.getElementById(viewId);
+      if (target) target.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goToLanding() {
+      switchView("view-landing");
+    }
+
+    function showStudentSetup() {
+      switchView("view-student-setup");
+      setTimeout(() => document.getElementById("student-name").focus(), 150);
+    }
+
+    function confirmExitChat() {
+      if (confirm("Apakah kamu yakin ingin keluar dari obrolan? Jawaban yang belum selesai tidak akan tersimpan.")) {
+        goToLanding();
+      }
+    }
+
+    /* ==========================================================
+       ALUR SISWA: CHAT SIMULATION
+       ========================================================== */
+    function startChatSimulation(e) {
+      e.preventDefault();
+      const name = document.getElementById("student-name").value.trim();
+      const sClass = document.getElementById("student-class").value.trim();
+
+      if (!name || !sClass) {
+        alert("Mohon isi nama dan kelasmu terlebih dahulu ya!");
+        return;
+      }
+
+      currentStudent = {
+        name: name,
+        class: sClass,
+        answers: {},
+        timestamp: new Date().toISOString()
+      };
+
+      currentQuestionIndex = 0;
+      switchView("view-student-chat");
+
+      // Reset chat area
+      const msgArea = document.getElementById("chat-messages-area");
+      msgArea.innerHTML = "";
+
+      // Greeting message from Bot/Guru
+      renderBotMessage(`Halo <b>${name}</b> dari kelas <b>${sClass}</b>! 👋 Selamat datang di obrolan asesmen diagnostik ini.`);
+      
+      setTimeout(() => {
+        renderBotMessage("Di sini tidak ada jawaban yang salah. Jawablah dengan santai dan jujur sesuai apa yang sebenarnya kamu rasakan atau lakukan sehari-hari ya! Yuk kita mulai ✨", () => {
+          showQuestion(currentQuestionIndex);
+        });
+      }, 700);
+    }
+
+    function getTimeString() {
+      const now = new Date();
+      return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    }
+
+    function renderBotMessage(htmlText, callback) {
+      const msgArea = document.getElementById("chat-messages-area");
+      
+      // Tampilkan typing indicator
+      const typingId = "typing-" + Date.now();
+      const typingEl = document.createElement("div");
+      typingEl.className = "msg-row msg-incoming";
+      typingEl.id = typingId;
+      typingEl.innerHTML = `
+        <div class="typing-bubble">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      msgArea.appendChild(typingEl);
+      msgArea.scrollTop = msgArea.scrollHeight;
+
+      document.getElementById("chat-status-text").innerText = "Sedang mengetik...";
+
+      setTimeout(() => {
+        // Hapus typing indicator
+        const curTyping = document.getElementById(typingId);
+        if (curTyping) curTyping.remove();
+
+        document.getElementById("chat-status-text").innerText = "Online • Mendengarkanmu";
+
+        // Tambahkan balon pesan
+        const row = document.createElement("div");
+        row.className = "msg-row msg-incoming";
+        row.innerHTML = `
+          <div class="bubble bubble-incoming">
+            <div>${htmlText}</div>
+            <span class="msg-time">${getTimeString()}</span>
+          </div>
+        `;
+        msgArea.appendChild(row);
+        msgArea.scrollTop = msgArea.scrollHeight;
+        playChatSound(false);
+
+        if (callback) callback();
+      }, 500);
+    }
+
+    function renderStudentMessage(text) {
+      const msgArea = document.getElementById("chat-messages-area");
+      const row = document.createElement("div");
+      row.className = "msg-row msg-outgoing";
+      row.innerHTML = `
+        <div class="bubble bubble-outgoing">
+          <div>${text}</div>
+          <span class="msg-time">${getTimeString()} ✓✓</span>
+        </div>
+      `;
+      msgArea.appendChild(row);
+      msgArea.scrollTop = msgArea.scrollHeight;
+      playChatSound(true);
+    }
+
+    function showQuestion(qIdx) {
+      if (qIdx >= QUESTIONS.length) {
+        finishAssessment();
+        return;
+      }
+
+      const q = QUESTIONS[qIdx];
+
+      // Update progress labels & bar
+      const progressPercent = Math.round(((qIdx + 1) / QUESTIONS.length) * 100);
+      document.getElementById("chat-progress-fill").style.width = progressPercent + "%";
+      document.getElementById("chat-counter-label").innerText = `Pertanyaan ${qIdx + 1} / ${QUESTIONS.length}`;
+      document.getElementById("chat-aspect-label").innerText = `Aspek: ${q.aspek}`;
+
+      // Tampilkan bot bubble pertanyaan
+      renderBotMessage(`<b>Soal No. ${q.id}</b><br>${q.text}`, () => {
+        renderOptions(q);
+      });
+    }
+
+    function renderOptions(question) {
+      const container = document.getElementById("options-buttons-container");
+      container.innerHTML = "";
+
+      question.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "btn-option";
+        btn.innerHTML = `
+          <span class="opt-letter">${opt.key.toUpperCase()}</span>
+          <span>${opt.text}</span>
+        `;
+        btn.onclick = () => handleStudentChoose(question.id, opt);
+        container.appendChild(btn);
+      });
+
+      // Scroll options to top
+      document.getElementById("chat-options-tray").scrollTop = 0;
+    }
+
+    function handleStudentChoose(qId, selectedOpt) {
+      // Simpan jawaban siswa
+      currentStudent.answers[qId] = selectedOpt.key;
+
+      // Render balon chat dari siswa di kanan
+      renderStudentMessage(`<b>(${selectedOpt.key.toUpperCase()})</b> ${selectedOpt.text}`);
+
+      // Kosongkan tray sementara
+      const container = document.getElementById("options-buttons-container");
+      container.innerHTML = `<div style="font-size: 12px; color: #9ca3af; text-align: center; padding: 12px;">Menyiapkan pertanyaan berikutnya... ⏳</div>`;
+
+      // Lanjut ke pertanyaan berikutnya
+      currentQuestionIndex++;
+      setTimeout(() => {
+        showQuestion(currentQuestionIndex);
+      }, 550);
+    }
+
+    /* ==========================================================
+       LOGIKA KESIMPULAN OTOMATIS (3 KOLOM WAJIB)
+       ========================================================== */
+    function calculateConclusions(answers) {
+      // 1. GAYA BELAJAR
+      // Pertanyaan 21 adalah penentu utama: a=Visual Teks, b=Auditori, c=Audio-Visual, d=Kinestetik
+      const q21 = answers[21] || "a";
+      let gayaBelajar = "";
+      let gayaDesc = "";
+
+      if (q21 === "a") {
+        gayaBelajar = "Visual Teks";
+        gayaDesc = "Sangat cepat memahami materi melalui teks mandiri, modul bacaan, bagan, dan infografis.";
+      } else if (q21 === "b") {
+        gayaBelajar = "Auditori";
+        gayaDesc = "Mudah menangkap penjelasan lewat ceramah interaktif guru, diskusi lisan, dan mendengarkan penjelasan langsung.";
+      } else if (q21 === "c") {
+        gayaBelajar = "Audio-Visual";
+        gayaDesc = "Sangat optimal belajar dengan tayangan video pembelajaran, slide visual menarik, film pendek, atau vlog.";
+      } else {
+        gayaBelajar = "Kinestetik";
+        gayaDesc = "Lebih aktif dan paham saat diajak praktik langsung, simulasi, bermain peran (role play), dan aktivitas motorik.";
+      }
+
+      // 2. MINAT & BAKAT
+      // Berdasarkan Q22 (Format Karya), Q23 (Topik Minat), dan Q17 (Peran Kelompok)
+      const q22 = answers[22] || "a";
+      const q23 = answers[23] || "a";
+      const q17 = answers[17] || "a";
+
+      let formatKarya = "";
+      if (q22 === "a") formatKarya = "Karya Tulis (Puisi/Cerpen/Esai)";
+      else if (q22 === "b") formatKarya = "Karya Lisan (Podcast/Storytelling)";
+      else if (q22 === "c") formatKarya = "Karya Visual (Poster/Infografis)";
+      else formatKarya = "Karya Video & Drama";
+
+      let topikMinat = "";
+      if (q23 === "a") topikMinat = "Teknologi & Sains Digital";
+      else if (q23 === "b") topikMinat = "Isu Sosial, Seni & Budaya";
+      else if (q23 === "c") topikMinat = "Fiksi, Sastra & Petualangan";
+      else topikMinat = "Lingkungan & Alam Hidup";
+
+      let peran = "";
+      if (q17 === "a") peran = "Koordinator/Pemimpin";
+      else if (q17 === "b") peran = "Notulis/Sekretaris";
+      else if (q17 === "c") peran = "Presenter/Juru Bicara";
+      else peran = "Riset & Penyusun Materi";
+
+      const minatBakat = `${formatKarya} | Topik: ${topikMinat}`;
+      const minatDesc = `Peran Kelompok Favorit: ${peran}. Menyukai eksplorasi tema ${topikMinat}.`;
+
+      // 3. AKTIVITAS BELAJAR DI RUMAH
+      // Berdasarkan Q6 (Waktu belajar), Q7 (Keteraturan), Q11 (Pendamping), dan Q12 (Fasilitas)
+      const q6 = answers[6] || "b";
+      const q7 = answers[7] || "b";
+      const q11 = answers[11] || "d";
+      const q12 = answers[12] || "a";
+
+      let durasi = (q6 === "a") ? ">2 jam/hari" : (q6 === "b") ? "1-2 jam/hari" : (q6 === "c") ? "<1 jam/hari" : "insidental saat ujian";
+      let keteraturan = (q7 === "a") ? "Teratur & Disiplin" : (q7 === "b") ? "Fleksibel" : (q7 === "c") ? "Sering Menunda" : "Perlu Didampingi";
+      let fasilitas = (q12 === "a") ? "Meja khusus tenang" : (q12 === "b") ? "Berbagi ruang" : "Fasilitas fleksibel";
+
+      let aktivitasRumah = `${keteraturan} (${durasi})`;
+      let rumahDesc = `Fasilitas: ${fasilitas}. Pendamping belajar: ${q11 === "a" ? "Keluarga" : q11 === "b" ? "Tutor Les" : q11 === "c" ? "Teman Sebaya" : "Mandiri"}.`;
+
+      return {
+        gayaBelajar,
+        gayaDesc,
+        minatBakat,
+        minatDesc,
+        aktivitasRumah,
+        rumahDesc
+      };
+    }
+
+    /* ==========================================================
+       PENYELESAIAN CHAT & PENYIMPANAN
+       ========================================================== */
+    function finishAssessment() {
+      // Hitung kesimpulan
+      const conclusions = calculateConclusions(currentStudent.answers);
+      
+      const record = {
+        id: "REC-" + Date.now(),
+        name: currentStudent.name,
+        class: currentStudent.class,
+        answers: currentStudent.answers,
+        timestamp: new Date().toLocaleString("id-ID"),
+        conclusions: conclusions
+      };
+
+      // Simpan ke localStorage
+      saveStudentRecord(record);
+
+      // Tampilkan ke layar hasil siswa
+      document.getElementById("res-student-name").innerText = record.name;
+      document.getElementById("res-gaya-belajar").innerText = conclusions.gayaBelajar;
+      document.getElementById("res-gaya-desc").innerText = conclusions.gayaDesc;
+      document.getElementById("res-minat-bakat").innerText = conclusions.minatBakat;
+      document.getElementById("res-minat-desc").innerText = conclusions.minatDesc;
+      document.getElementById("res-aktivitas-rumah").innerText = conclusions.aktivitasRumah;
+      document.getElementById("res-rumah-desc").innerText = conclusions.rumahDesc;
+
+      switchView("view-student-result");
+    }
+
+    function saveStudentRecord(record) {
+      let list = getSavedRecords();
+      list.unshift(record); // Tambahkan di awal
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    function getSavedRecords() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    /* ==========================================================
+       ALUR GURU: VERIFIKASI PIN (PIN = 55555)
+       ========================================================== */
+    function openPinModal() {
+      const modal = document.getElementById("modal-pin-verify");
+      modal.classList.add("active");
+      document.getElementById("pin-error-alert").classList.remove("show");
+
+      // Reset digit input
+      const digits = document.querySelectorAll(".pin-digit-box");
+      digits.forEach(d => d.value = "");
+      setTimeout(() => digits[0].focus(), 150);
+    }
+
+    function closePinModal() {
+      document.getElementById("modal-pin-verify").classList.remove("active");
+    }
+
+    // Auto-advance input PIN 5-digit
+    const pinInputs = document.querySelectorAll(".pin-digit-box");
+    pinInputs.forEach((input, index) => {
+      input.addEventListener("input", (e) => {
+        if (input.value.length === 1 && index < pinInputs.length - 1) {
+          pinInputs[index + 1].focus();
+        }
+        if (getEnteredPin().length === 5) {
+          checkEnteredPin();
+        }
+      });
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && !input.value && index > 0) {
+          pinInputs[index - 1].focus();
+        }
+        if (e.key === "Enter") {
+          checkEnteredPin();
+        }
+      });
+    });
+
+    function getEnteredPin() {
+      let pin = "";
+      document.querySelectorAll(".pin-digit-box").forEach(box => {
+        pin += box.value;
+      });
+      return pin;
+    }
+
+    function checkEnteredPin() {
+      const pin = getEnteredPin();
+      const errAlert = document.getElementById("pin-error-alert");
+
+      if (pin === TEACHER_PIN) {
+        // PIN Benar
+        errAlert.classList.remove("show");
+        closePinModal();
+        openTeacherDashboard();
+      } else {
+        // PIN Salah
+        errAlert.classList.add("show");
+        const digits = document.querySelectorAll(".pin-digit-box");
+        digits.forEach(d => d.value = "");
+        digits[0].focus();
+      }
+    }
+
+    /* ==========================================================
+       PORTAL REKAP GURU (DASHBOARD)
+       ========================================================== */
+    function openTeacherDashboard() {
+      switchView("view-teacher-dashboard");
+      populateClassFilterOptions();
+      renderRekapTable();
+      updateDashboardStats();
+    }
+
+    function populateClassFilterOptions() {
+      const records = getSavedRecords();
+      const select = document.getElementById("filter-class");
+      const currentVal = select.value;
+
+      // Dapatkan daftar kelas unik
+      const classes = Array.from(new Set(records.map(r => r.class))).filter(Boolean);
+      
+      select.innerHTML = `<option value="ALL">Semua Kelas</option>`;
+      classes.forEach(c => {
+        select.innerHTML += `<option value="${c}">${c}</option>`;
+      });
+
+      if (classes.includes(currentVal)) {
+        select.value = currentVal;
+      }
+    }
+
+    function updateDashboardStats() {
+      const records = getSavedRecords();
+      document.getElementById("stat-total-students").innerText = records.length;
+
+      if (records.length === 0) {
+        document.getElementById("stat-top-learning-style").innerText = "-";
+        document.getElementById("stat-wellbeing").innerText = "-";
+        document.getElementById("stat-support").innerText = "-";
+        return;
+      }
+
+      // Hitung Gaya Belajar dominan
+      const stylesCount = {};
+      records.forEach(r => {
+        const st = r.conclusions.gayaBelajar;
+        stylesCount[st] = (stylesCount[st] || 0) + 1;
+      });
+
+      let topStyle = "-";
+      let maxCount = -1;
+      for (const [st, cnt] of Object.entries(stylesCount)) {
+        if (cnt > maxCount) {
+          maxCount = cnt;
+          topStyle = st;
+        }
+      }
+      document.getElementById("stat-top-learning-style").innerText = topStyle;
+
+      // Hitung Kesejahteraan Emosional (Q1)
+      let semanganCount = 0;
+      records.forEach(r => {
+        if (r.answers && (r.answers[1] === "a" || r.answers[1] === "b")) {
+          semanganCount++;
+        }
+      });
+      const percentSemangat = Math.round((semanganCount / records.length) * 100);
+      document.getElementById("stat-wellbeing").innerText = percentSemangat + "% Siap Belajar";
+
+      // Dukungan rumah (Q13)
+      let supportedCount = 0;
+      records.forEach(r => {
+        if (r.answers && (r.answers[13] === "a" || r.answers[13] === "b")) {
+          supportedCount++;
+        }
+      });
+      const percentSupport = Math.round((supportedCount / records.length) * 100);
+      document.getElementById("stat-support").innerText = percentSupport + "% Didukung";
+    }
+
+    function renderRekapTable() {
+      const records = getSavedRecords();
+      const tbody = document.getElementById("rekap-table-body");
+      const searchKey = document.getElementById("filter-search").value.toLowerCase().trim();
+      const classFilter = document.getElementById("filter-class").value;
+      const styleFilter = document.getElementById("filter-style").value;
+
+      // Filter data
+      const filtered = records.filter(r => {
+        const matchName = r.name.toLowerCase().includes(searchKey);
+        const matchClass = (classFilter === "ALL") || (r.class === classFilter);
+        const matchStyle = (styleFilter === "ALL") || (r.conclusions.gayaBelajar.includes(styleFilter));
+        return matchName && matchClass && matchStyle;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6">
+              <div class="empty-state">
+                <div class="empty-icon">📂</div>
+                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">Belum Ada Data Rekapitulasi</h4>
+                <p style="font-size: 13px;">Data akan otomatis muncul di sini setelah siswa menyelesaikan simulasi chat, atau klik "Tambah Contoh Data".</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = "";
+      filtered.forEach((r, idx) => {
+        const tr = document.createElement("tr");
+
+        // Tentukan style badge gaya belajar
+        let styleTagClass = "tag-visual";
+        if (r.conclusions.gayaBelajar.includes("Auditori")) styleTagClass = "tag-auditori";
+        else if (r.conclusions.gayaBelajar.includes("Audio-Visual")) styleTagClass = "tag-audiovisual";
+        else if (r.conclusions.gayaBelajar.includes("Kinestetik")) styleTagClass = "tag-kinestetik";
+
+        tr.innerHTML = `
+          <td style="font-weight: 600; color: #64748b;">${idx + 1}</td>
+          <td>
+            <div class="student-badge-name">${r.name}</div>
+            <span class="student-badge-class">${r.class}</span>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">${r.timestamp || "-"}</div>
+          </td>
+          <td>
+            <div class="pill-tag ${styleTagClass}">🎨 ${r.conclusions.gayaBelajar}</div>
+            <div class="summary-text-desc">${r.conclusions.gayaDesc}</div>
+          </td>
+          <td>
+            <div class="pill-tag tag-blue">🌟 ${r.conclusions.minatBakat}</div>
+            <div class="summary-text-desc">${r.conclusions.minatDesc}</div>
+          </td>
+          <td>
+            <div class="pill-tag tag-yellow">🏡 ${r.conclusions.aktivitasRumah}</div>
+            <div class="summary-text-desc">${r.conclusions.rumahDesc}</div>
+          </td>
+          <td style="text-align: center;">
+            <div style="display: flex; gap: 6px; justify-content: center;">
+              <button class="btn-dash" style="padding: 6px 10px; font-size: 12px;" onclick="viewStudentDetail('${r.id}')" title="Lihat 25 Jawaban">
+                👁️ Detail
+              </button>
+              <button class="btn-dash" style="padding: 6px 10px; font-size: 12px; color: #ef4444;" onclick="deleteStudent('${r.id}')" title="Hapus Data">
+                🗑️
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* Modal Detail 25 Jawaban */
+    function viewStudentDetail(recordId) {
+      const records = getSavedRecords();
+      const rec = records.find(r => r.id === recordId);
+      if (!rec) return;
+
+      document.getElementById("modal-detail-student-name").innerText = `Detail Jawaban: ${rec.name}`;
+      document.getElementById("modal-detail-student-class").innerText = `Kelas: ${rec.class} • Tanggal: ${rec.timestamp || "-"}`;
+
+      const body = document.getElementById("modal-detail-body");
+      body.innerHTML = `
+        <div style="background: #f8fafc; border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; border: 1px solid var(--border-soft);">
+          <div style="font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 4px;">💡 Ringkasan Diagnostik:</div>
+          <div style="font-size: 13px; color: #475569;">
+            <b>Gaya Belajar:</b> ${rec.conclusions.gayaBelajar}<br>
+            <b>Minat & Bakat:</b> ${rec.conclusions.minatBakat}<br>
+            <b>Aktivitas Rumah:</b> ${rec.conclusions.aktivitasRumah}
+          </div>
+        </div>
+        <h4 style="font-size: 14px; font-weight: 700; color: #334155; margin-bottom: 12px;">Daftar 25 Butir Jawaban:</h4>
+      `;
+
+      QUESTIONS.forEach(q => {
+        const studentChoiceKey = rec.answers ? rec.answers[q.id] : null;
+        let chosenOptionText = "Tidak diisi";
+
+        if (studentChoiceKey) {
+          const opt = q.options.find(o => o.key.toLowerCase() === studentChoiceKey.toLowerCase());
+          if (opt) {
+            chosenOptionText = `<b>(${opt.key.toUpperCase()})</b> ${opt.text}`;
+          }
+        }
+
+        const item = document.createElement("div");
+        item.className = "answer-item-card";
+        item.innerHTML = `
+          <span class="answer-aspect-badge">${q.aspek}</span>
+          <div class="answer-q-title">${q.id}. ${q.text}</div>
+          <div class="answer-picked">Pilihan Siswa: ${chosenOptionText}</div>
+        `;
+        body.appendChild(item);
+      });
+
+      document.getElementById("modal-student-detail").classList.add("active");
+    }
+
+    function closeDetailModal() {
+      document.getElementById("modal-student-detail").classList.remove("active");
+    }
+
+    function deleteStudent(recordId) {
+      if (confirm("Apakah Bapak/Ibu Guru yakin ingin menghapus data siswa ini?")) {
+        let records = getSavedRecords();
+        records = records.filter(r => r.id !== recordId);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+        renderRekapTable();
+        updateDashboardStats();
+        populateClassFilterOptions();
+      }
+    }
+
+    function clearAllDataPrompt() {
+      if (confirm("PERINGATAN: Semua data rekap siswa akan dihapus permanen. Lanjutkan?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderRekapTable();
+        updateDashboardStats();
+        populateClassFilterOptions();
+      }
+    }
+
+    /* ==========================================================
+       CONTOH DATA SIMULASI (UNTUK GURU MENCOBA LANGSUNG)
+       ========================================================== */
+    function loadSampleDataPrompt() {
+      const sample1Answers = {
+        1:"a", 2:"a", 3:"a", 4:"a", 5:"a",
+        6:"a", 7:"a", 8:"a", 9:"a", 10:"a",
+        11:"a", 12:"a", 13:"a", 14:"a", 15:"a",
+        16:"a", 17:"a", 18:"a", 19:"a", 20:"a",
+        21:"c", 22:"d", 23:"a", 24:"c", 25:"a"
+      };
+
+      const sample2Answers = {
+        1:"b", 2:"b", 3:"b", 4:"b", 5:"b",
+        6:"b", 7:"b", 8:"b", 9:"c", 10:"b",
+        11:"d", 12:"b", 13:"b", 14:"b", 15:"b",
+        16:"b", 17:"b", 18:"a", 19:"b", 20:"b",
+        21:"a", 22:"a", 23:"c", 24:"a", 25:"b"
+      };
+
+      const sample3Answers = {
+        1:"c", 2:"d", 3:"b", 4:"c", 5:"c",
+        6:"c", 7:"c", 8:"b", 9:"a", 10:"c",
+        11:"c", 12:"c", 13:"c", 14:"b", 15:"c",
+        16:"c", 17:"c", 18:"c", 19:"b", 20:"b",
+        21:"b", 22:"b", 23:"b", 24:"c", 25:"d"
+      };
+
+      const samples = [
+        {
+          id: "REC-SIM-1",
+          name: "Muhammad Rizky Pratama",
+          class: "XI Merdeka 1",
+          answers: sample1Answers,
+          timestamp: new Date().toLocaleString("id-ID"),
+          conclusions: calculateConclusions(sample1Answers)
+        },
+        {
+          id: "REC-SIM-2",
+          name: "Siti Rahma Azzahra",
+          class: "XI Merdeka 1",
+          answers: sample2Answers,
+          timestamp: new Date().toLocaleString("id-ID"),
+          conclusions: calculateConclusions(sample2Answers)
+        },
+        {
+          id: "REC-SIM-3",
+          name: "Dimas Arya Wicaksana",
+          class: "XI Merdeka 2",
+          answers: sample3Answers,
+          timestamp: new Date().toLocaleString("id-ID"),
+          conclusions: calculateConclusions(sample3Answers)
+        }
+      ];
+
+      let existing = getSavedRecords();
+      existing = [...samples, ...existing];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+
+      populateClassFilterOptions();
+      renderRekapTable();
+      updateDashboardStats();
+      alert("Berhasil menambahkan 3 contoh data simulasi siswa!");
+    }
+
+    /* ==========================================================
+       EXPORT EXCEL / CSV
+       ========================================================== */
+    function exportToCSV() {
+      const records = getSavedRecords();
+      if (records.length === 0) {
+        alert("Tidak ada data untuk diekspor!");
+        return;
+      }
+
+      let csv = "\uFEFF"; // UTF-8 BOM agar rapi di Microsoft Excel
+      csv += "No,Nama Siswa,Kelas,Waktu Pengisian,Gaya Belajar,Minat dan Bakat,Aktivitas Belajar di Rumah\n";
+
+      records.forEach((r, idx) => {
+        const no = idx + 1;
+        const name = `"${r.name.replace(/"/g, '""')}"`;
+        const sClass = `"${r.class.replace(/"/g, '""')}"`;
+        const time = `"${(r.timestamp || "").replace(/"/g, '""')}"`;
+        const gaya = `"${r.conclusions.gayaBelajar} - ${r.conclusions.gayaDesc.replace(/"/g, '""')}"`;
+        const minat = `"${r.conclusions.minatBakat} - ${r.conclusions.minatDesc.replace(/"/g, '""')}"`;
+        const rumah = `"${r.conclusions.aktivitasRumah} - ${r.conclusions.rumahDesc.replace(/"/g, '""')}"`;
+
+        csv += `${no},${name},${sClass},${time},${gaya},${minat},${rumah}\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Rekap_Asesmen_Diagnostik_SMA_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
