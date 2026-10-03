@@ -1200,12 +1200,189 @@
       border-left: 3px solid #10b981;
     }
 
+    /* Google Sheets Integration Styles */
+    .sheets-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .sheets-badge-pill.pill-connected {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .sheets-badge-pill.pill-disconnected {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+    }
+    .sheets-badge-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .status-dot.pulse {
+      animation: pulseDot 1.5s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .btn-dash-sync {
+      background: #eff6ff !important;
+      color: #1d4ed8 !important;
+      border-color: #bfdbfe !important;
+    }
+    .btn-dash-sync:hover {
+      background: #dbeafe !important;
+    }
+    .btn-dash-config {
+      background: #f5f3ff !important;
+      color: #6d28d9 !important;
+      border-color: #ddd6fe !important;
+    }
+    .btn-dash-config:hover {
+      background: #ede9fe !important;
+    }
+    .sync-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    .sync-loading { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .sync-success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .sync-warning { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .sync-info { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+
+    /* Modal Google Sheets */
+    .sheet-modal-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 760px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+    .sheet-modal-header {
+      padding: 18px 24px;
+      background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%);
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sheet-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .step-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin-bottom: 14px;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .script-code-block {
+      background: #0f172a;
+      color: #38bdf8;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 12px;
+      max-height: 160px;
+      overflow-y: auto;
+      white-space: pre;
+      margin-top: 10px;
+      border: 1px solid #334155;
+    }
+
+    /* Toast notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast-msg {
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: slideInUp 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: auto;
+      max-width: 380px;
+    }
+    .toast-msg.toast-success { background: #065f46; border-left: 4px solid #34d399; }
+    .toast-msg.toast-error { background: #881337; border-left: 4px solid #f43f5e; }
+    .toast-msg.toast-info { background: #1e3a8a; border-left: 4px solid #60a5fa; }
+    @keyframes slideInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
     /* Print styling */
     @media print {
       body {
         background: #fff;
       }
-      .dashboard-header, .filter-card, .dash-actions, .hero-wrapper {
+      .dashboard-header, .filter-card, .dash-actions, .hero-wrapper, .sheets-badge-pill {
         display: none !important;
       }
       .table-card {
@@ -1362,8 +1539,12 @@
         <div class="result-badge">🎉 Asesmen Berhasil Diselesaikan!</div>
         <h2 style="font-size: 26px; font-weight: 700; margin-bottom: 8px;">Terima Kasih, <span id="res-student-name">Siswa</span>!</h2>
         <p style="color: var(--text-muted); font-size: 14px; max-width: 520px; margin: 0 auto;">
-          Jawabanmu sudah otomatis terkirim dan tersimpan ke rekap Bapak/Ibu Guru. Berikut adalah gambaran ringkas profil belajarmu:
+          Jawabanmu sedang diproses dan dikirim ke rekap Bapak/Ibu Guru. Berikut adalah gambaran ringkas profil belajarmu:
         </p>
+
+        <div id="res-sync-status" class="sync-status-badge sync-loading" style="margin: 14px auto 6px; display: inline-flex;">
+          ⏳ Menyimpan jawaban ke rekap...
+        </div>
 
         <div class="conclusion-grid">
           <div class="conclusion-box box-gaya">
@@ -1405,10 +1586,22 @@
     <header class="dashboard-header">
       <div class="container dash-nav">
         <div class="dash-title-group">
-          <h1>📊 Rekapitulasi Asesmen Diagnostik Siswa</h1>
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px;">
+            <h1 style="margin: 0;">📊 Rekapitulasi Asesmen Diagnostik Siswa</h1>
+            <span id="sheets-connection-badge" class="sheets-badge-pill pill-disconnected" onclick="openSheetsConfigModal()" title="Klik untuk mengelola sambungan Google Sheets">
+              <span class="status-dot"></span>
+              <span id="sheets-connection-text">Google Sheets: Belum Dihubungkan</span>
+            </span>
+          </div>
           <p>Portal Hasil Diagnostik Non-Kognitif SMA (Mata Pelajaran Bahasa Indonesia)</p>
         </div>
         <div class="dash-actions">
+          <button class="btn-dash btn-dash-sync" id="btn-sync-sheets" onclick="syncGoogleSheetsData()" title="Muat data kiriman terbaru dari Google Sheets">
+            🔄 Sinkron Sheets
+          </button>
+          <button class="btn-dash btn-dash-config" onclick="openSheetsConfigModal()" title="Pengaturan & Panduan Google Sheets">
+            ⚙️ Hubungkan Sheets
+          </button>
           <button class="btn-dash" onclick="exportToCSV()">
             📥 Unduh Excel / CSV
           </button>
@@ -1551,6 +1744,133 @@
       </div>
     </div>
   </div>
+
+  <!-- ==========================================================
+       MODAL 3: PENGATURAN & SAMBUNGAN GOOGLE SHEETS
+       ========================================================== -->
+  <div id="modal-sheets-config" class="modal-overlay">
+    <div class="sheet-modal-card">
+      <div class="sheet-modal-header">
+        <div>
+          <h3 style="font-size: 18px; font-weight: 700; color: #0f172a;">⚙️ Hubungkan dengan Google Sheets</h3>
+          <p style="font-size: 12px; color: var(--text-muted);">Rekapitulasi otomatis jawaban dari semua smartphone / perangkat siswa secara online</p>
+        </div>
+        <button class="btn-chat-back" onclick="closeSheetsConfigModal()">✕</button>
+      </div>
+
+      <div class="sheet-modal-body">
+        <!-- Status Box -->
+        <div id="modal-status-box" style="background: #f8fafc; border: 1.5px dashed var(--border-soft); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span id="modal-status-dot" class="status-dot" style="background: #94a3b8; width: 10px; height: 10px;"></span>
+            <div>
+              <div id="modal-status-title" style="font-weight: 700; font-size: 13px; color: #1e293b;">Status: Belum Terhubung</div>
+              <div id="modal-status-desc" style="font-size: 12px; color: #64748b;">Data murid baru tersimpan lokal di browser masing-masing.</div>
+            </div>
+          </div>
+          <button class="btn-dash" id="btn-open-live-sheet" style="display: none; font-size: 12px;" onclick="window.open(getCurrentSheetUrl(), '_blank')">
+            ↗ Buka URL Apps Script
+          </button>
+        </div>
+
+        <!-- Input URL Google Apps Script -->
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: 700; color: #334155; margin-bottom: 6px; font-size: 13px;">
+            URL Web App Google Apps Script:
+          </label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="url" id="input-sheets-url" class="form-input" style="flex: 1; min-width: 260px;" placeholder="https://script.google.com/macros/s/.../exec">
+            <button type="button" class="btn-primary-pin" style="padding: 10px 18px; font-size: 13px;" onclick="saveAndTestSheetsConnection()">
+              💾 Simpan & Uji Koneksi
+            </button>
+            <button type="button" class="btn-secondary" style="padding: 10px 14px; font-size: 12px;" onclick="disconnectSheets()">
+              Putus
+            </button>
+          </div>
+          <p style="font-size: 11px; color: #64748b; margin-top: 4px;">
+            URL ini didapatkan setelah Anda menerapkan (deploy) Apps Script di Google Spreadsheet Anda sebagai Web App.
+          </p>
+        </div>
+
+        <!-- Link Murid Terintegrasi -->
+        <div id="share-link-container" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: 14px 18px; margin-bottom: 22px;">
+          <div style="font-weight: 700; color: #166534; font-size: 13px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+            <span>📲</span> Tautan Asesmen untuk Murid (Langsung Terhubung ke Sheets Anda)
+          </div>
+          <p style="font-size: 12px; color: #15803d; margin-bottom: 10px; line-height: 1.4;">
+            Bagikan link ini ke murid Anda melalui WhatsApp / Google Classroom. Murid yang mengisi dari HP mana pun akan otomatis mengirimkan jawabannya ke Spreadsheet Anda:
+          </p>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="shareable-student-link" readonly class="form-input" style="font-size: 12px; background: #ffffff; color: #1e293b; font-family: monospace;" value="">
+            <button type="button" class="btn-dash" onclick="copyStudentLink()" style="background: #16a34a; color: #ffffff; font-weight: 700; white-space: nowrap; border-color: #15803d;">
+              📋 Salin Tautan
+            </button>
+          </div>
+        </div>
+
+        <!-- Panduan 4 Langkah Mudah -->
+        <div style="border-top: 1px solid var(--border-soft); padding-top: 18px;">
+          <h4 style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+            <span>📖</span> Panduan Praktis 4 Langkah Menyiapkan Google Spreadsheet:
+          </h4>
+
+          <div class="step-box">
+            <div class="step-header">
+              <span class="step-num">1</span>
+              <span>Buat Spreadsheet Baru</span>
+            </div>
+            <p style="color: #475569; font-size: 12px;">
+              Buka <a href="https://sheets.new" target="_blank" style="color: #0284c7; font-weight: 600;">sheets.new</a> di browser untuk membuat Google Spreadsheet baru. Beri judul misalnya: <b>"Rekap Asesmen Diagnostik SMA"</b>.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-header">
+              <span class="step-num">2</span>
+              <span>Buka Menu Ekstensi &gt; Apps Script</span>
+            </div>
+            <p style="color: #475569; font-size: 12px;">
+              Di bagian menu atas Google Spreadsheet, klik <b>Ekstensi (Extensions)</b> lalu pilih <b>Apps Script</b>. Jendela editor kode akan terbuka.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-header" style="justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="step-num">3</span>
+                <span>Tempelkan Kode Script di Bawah Ini</span>
+              </div>
+              <button type="button" class="btn-dash" onclick="copyAppsScriptCode()" style="background: #0284c7; color: #fff; font-size: 11px; font-weight: 700;">
+                📋 Salin Kode Script
+              </button>
+            </div>
+            <p style="color: #475569; font-size: 12px; margin-bottom: 6px;">
+              Hapus tulisan bawaan <code>function myFunction() {}</code>, lalu tempelkan seluruh kode berikut dan klik ikon <b>Simpan 💾</b>:
+            </p>
+            <div class="script-code-block" id="apps-script-preview-code"></div>
+          </div>
+
+          <div class="step-box">
+            <div class="step-header">
+              <span class="step-num">4</span>
+              <span>Deploy sebagai Web App &amp; Salin URL</span>
+            </div>
+            <ol style="color: #475569; font-size: 12px; margin-left: 20px; line-height: 1.6;">
+              <li>Di pojok kanan atas Apps Script, klik tombol <b>Deploy (Terapkan) &gt; New deployment (Penerapan baru)</b>.</li>
+              <li>Klik ikon roda gigi ⚙️ di sebelah kiri, pilih <b>Web app (Aplikasi Web)</b>.</li>
+              <li>Pada kolom <i>Execute as</i>, pilih: <b>Me (email Anda)</b>.</li>
+              <li>Pada kolom <i>Who has access</i>, WAJIB pilih: <b>Anyone (Siapa saja)</b> agar siswa bisa mengirim jawaban tanpa harus login.</li>
+              <li>Klik <b>Deploy</b>, lalu beri izin akun Google Anda (jika ada peringatan keamanan, klik <i>Advanced / Lanjutan &gt; Buka script (tidak aman)</i>).</li>
+              <li>Salin <b>Web app URL</b> (yang berakhiran <code>/exec</code>), lalu tempelkan ke kolom input di atas!</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
 
   <!-- ==========================================================
        LOGIKA & KONTEN 25 PERTANYAAN ASESMEN (JAVASCRIPT)
@@ -1845,6 +2165,111 @@
         ]
       }
     ];
+
+    /* ==========================================================
+       KONFIGURASI GOOGLE SHEETS
+       ========================================================== */
+    // CATATAN GURU:
+    // Tempelkan URL Google Apps Script Web App Anda di dalam tanda petik di bawah ini
+    // Contoh: const DEFAULT_SHEET_URL = "https://script.google.com/macros/s/.../exec";
+    const DEFAULT_SHEET_URL = "https://script.google.com/macros/s/AKfycbwaLdkw7Yd06ZWkBKAjim2dQ0ijlBSNrgIlBF0d_8j1rPYt7Zeq4C8sgq1Wq-A8OUMH/exec"; 
+    const SHEET_URL_KEY = "asesmen_google_sheet_url";
+
+    // Kode Google Apps Script siap pakai untuk disalin
+    const GOOGLE_APPS_SCRIPT_CODE = `function doPost(e) {
+  var lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data;
+    if (e.postData && e.postData.contents) {
+      try { data = JSON.parse(e.postData.contents); } catch (err) { data = e.parameter; }
+    } else {
+      data = e.parameter || {};
+    }
+
+    if (sheet.getLastRow() === 0) {
+      var headers = [
+        "Waktu Pengisian", "Nama Siswa", "Kelas", 
+        "Gaya Belajar Dominan", "Detail Gaya Belajar", 
+        "Minat & Bakat", "Detail Minat", 
+        "Aktivitas di Rumah", "Detail Aktivitas Rumah", 
+        "Jawaban Lengkap (JSON)"
+      ];
+      sheet.appendRow(headers);
+      var headerRange = sheet.getRange(1, 1, 1, headers.length);
+      headerRange.setFontWeight("bold");
+      headerRange.setBackground("#0284c7");
+      headerRange.setFontColor("#ffffff");
+      sheet.setFrozenRows(1);
+    }
+
+    var answersJson = "";
+    if (data.answers) {
+      answersJson = typeof data.answers === "string" ? data.answers : JSON.stringify(data.answers);
+    }
+
+    var row = [
+      data.timestamp || new Date().toLocaleString("id-ID"),
+      data.name || "Anonim",
+      data.class || "-",
+      data.conclusions ? data.conclusions.gayaBelajar : (data.gayaBelajar || "-"),
+      data.conclusions ? data.conclusions.gayaDesc : (data.gayaDesc || "-"),
+      data.conclusions ? data.conclusions.minatBakat : (data.minatBakat || "-"),
+      data.conclusions ? data.conclusions.minatDesc : (data.minatDesc || "-"),
+      data.conclusions ? data.conclusions.aktivitasRumah : (data.aktivitasRumah || "-"),
+      data.conclusions ? data.conclusions.rumahDesc : (data.rumahDesc || "-"),
+      answersJson
+    ];
+
+    sheet.appendRow(row);
+    return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "Data berhasil dicatat" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function doGet(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var rows = sheet.getDataRange().getValues();
+    if (rows.length <= 1) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", data: [] }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    var records = [];
+    for (var i = 1; i < rows.length; i++) {
+      var r = rows[i];
+      if (!r[1]) continue;
+      var answersObj = {};
+      try { if (r[9]) answersObj = JSON.parse(r[9]); } catch (err) {}
+      records.push({
+        id: "GS-" + i,
+        timestamp: r[0],
+        name: r[1],
+        class: r[2],
+        conclusions: {
+          gayaBelajar: r[3] || "-",
+          gayaDesc: r[4] || "-",
+          minatBakat: r[5] || "-",
+          minatDesc: r[6] || "-",
+          aktivitasRumah: r[7] || "-",
+          rumahDesc: r[8] || "-"
+        },
+        answers: answersObj
+      });
+    }
+    return ContentService.createTextOutput(JSON.stringify({ status: "success", data: records }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}`;
 
     /* ==========================================================
        STATE APLIKASI
@@ -2148,9 +2573,72 @@
     }
 
     /* ==========================================================
+       HELPER KONEKSI & TOAST NOTIFIKASI
+       ========================================================== */
+    function getCurrentSheetUrl() {
+      return localStorage.getItem(SHEET_URL_KEY) || DEFAULT_SHEET_URL || "";
+    }
+
+    function showToast(message, type = "info", duration = 3500) {
+      const container = document.getElementById("toast-container");
+      if (!container) return;
+      const toast = document.createElement("div");
+      toast.className = `toast-msg toast-${type}`;
+      let icon = "ℹ️";
+      if (type === "success") icon = "✅";
+      if (type === "error") icon = "❌";
+      if (type === "warning") icon = "⚠️";
+      toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(10px)";
+        toast.style.transition = "all 0.3s ease";
+        setTimeout(() => toast.remove(), 300);
+      }, duration);
+    }
+
+    function initSheetUrlFromQuery() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sheetParam = urlParams.get("sheet") || urlParams.get("sid");
+        if (sheetParam) {
+          let targetUrl = sheetParam;
+          if (sheetParam.startsWith("aHR0c")) {
+            try { targetUrl = atob(sheetParam); } catch (e) {}
+          }
+          if (targetUrl.startsWith("http")) {
+            localStorage.setItem(SHEET_URL_KEY, targetUrl);
+            console.log("URL Google Sheets berhasil diinisialisasi dari parameter URL.");
+          }
+        }
+      } catch (err) {
+        console.warn("Gagal membaca query param sheet:", err);
+      }
+      updateSheetsBadgeStatus();
+    }
+
+    function updateSheetsBadgeStatus() {
+      const url = getCurrentSheetUrl();
+      const badge = document.getElementById("sheets-connection-badge");
+      const textEl = document.getElementById("sheets-connection-text");
+      if (!badge || !textEl) return;
+
+      if (url && url.trim().length > 0) {
+        badge.className = "sheets-badge-pill pill-connected";
+        textEl.innerHTML = "Google Sheets: Terhubung 🟢";
+        badge.title = "Google Sheets Aktif. Klik untuk opsi sinkronisasi.";
+      } else {
+        badge.className = "sheets-badge-pill pill-disconnected";
+        textEl.innerHTML = "Google Sheets: Belum Dihubungkan ⚪";
+        badge.title = "Klik untuk menghubungkan ke Google Sheets";
+      }
+    }
+
+    /* ==========================================================
        PENYELESAIAN CHAT & PENYIMPANAN
        ========================================================== */
-    function finishAssessment() {
+    async function finishAssessment() {
       // Hitung kesimpulan
       const conclusions = calculateConclusions(currentStudent.answers);
       
@@ -2163,7 +2651,7 @@
         conclusions: conclusions
       };
 
-      // Simpan ke localStorage
+      // Simpan ke localStorage sebagai backup lokal
       saveStudentRecord(record);
 
       // Tampilkan ke layar hasil siswa
@@ -2174,6 +2662,53 @@
       document.getElementById("res-minat-desc").innerText = conclusions.minatDesc;
       document.getElementById("res-aktivitas-rumah").innerText = conclusions.aktivitasRumah;
       document.getElementById("res-rumah-desc").innerText = conclusions.rumahDesc;
+
+      // Status pengiriman data
+      const statusEl = document.getElementById("res-sync-status");
+      const sheetUrl = getCurrentSheetUrl();
+
+      if (sheetUrl && sheetUrl.trim().length > 0) {
+        if (statusEl) {
+          statusEl.style.display = "inline-flex";
+          statusEl.className = "sync-status-badge sync-loading";
+          statusEl.innerHTML = "⏳ Mengirim jawaban ke Google Sheets Guru...";
+        }
+
+        try {
+          // Kirim POST ke Google Apps Script Web App dengan mode no-cors dan text/plain
+          fetch(sheetUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(record)
+          }).then(() => {
+            if (statusEl) {
+              statusEl.className = "sync-status-badge sync-success";
+              statusEl.innerHTML = "✅ Jawaban berhasil terkirim & tersimpan di Google Sheets Guru";
+            }
+          }).catch(err => {
+            console.warn("Gagal mengirim ke Google Sheets:", err);
+            if (statusEl) {
+              statusEl.className = "sync-status-badge sync-warning";
+              statusEl.innerHTML = "⚠️ Tersimpan lokal di perangkat ini (Gagal menghubungi Sheets Guru)";
+            }
+          });
+        } catch (err) {
+          console.warn("Error saat fetch Google Sheets:", err);
+          if (statusEl) {
+            statusEl.className = "sync-status-badge sync-warning";
+            statusEl.innerHTML = "⚠️ Tersimpan lokal di perangkat ini";
+          }
+        }
+      } else {
+        if (statusEl) {
+          statusEl.style.display = "inline-flex";
+          statusEl.className = "sync-status-badge sync-info";
+          statusEl.innerHTML = "💾 Tersimpan lokal di perangkat ini (Google Sheets belum disetel)";
+        }
+      }
 
       switchView("view-student-result");
     }
@@ -2267,6 +2802,12 @@
       populateClassFilterOptions();
       renderRekapTable();
       updateDashboardStats();
+      updateSheetsBadgeStatus();
+
+      // Jika URL Google Sheets telah disetel, lakukan sinkronisasi otomatis
+      if (getCurrentSheetUrl()) {
+        syncGoogleSheetsData(true);
+      }
     }
 
     function populateClassFilterOptions() {
@@ -2579,6 +3120,203 @@
       link.click();
       document.body.removeChild(link);
     }
+
+    /* ==========================================================
+       MANAJEMEN INTEGRASI GOOGLE SHEETS
+       ========================================================== */
+    async function syncGoogleSheetsData(silent = false) {
+      const sheetUrl = getCurrentSheetUrl();
+      const btnSync = document.getElementById("btn-sync-sheets");
+
+      if (!sheetUrl || sheetUrl.trim().length === 0) {
+        if (!silent) {
+          showToast("Google Sheets belum dihubungkan. Silakan hubungkan terlebih dahulu.", "warning");
+          openSheetsConfigModal();
+        }
+        return;
+      }
+
+      if (btnSync) {
+        btnSync.disabled = true;
+        btnSync.innerHTML = "⏳ Sinkronisasi...";
+      }
+
+      if (!silent) {
+        showToast("Mengambil data rekap terbaru dari Google Sheets...", "info", 2000);
+      }
+
+      try {
+        const response = await fetch(sheetUrl, {
+          method: "GET",
+          headers: { "Accept": "application/json" }
+        });
+        const result = await response.json();
+
+        if (result && result.status === "success" && Array.isArray(result.data)) {
+          if (result.data.length > 0) {
+            // Simpan data dari Google Sheets ke penyimpanan lokal agar tabel terisi
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(result.data));
+            populateClassFilterOptions();
+            renderRekapTable();
+            updateDashboardStats();
+            if (!silent) {
+              showToast(`Berhasil menyinkronkan ${result.data.length} data siswa dari Google Sheets!`, "success");
+            }
+          } else {
+            if (!silent) {
+              showToast("Google Sheets tersambung, namun belum ada data siswa yang masuk.", "info");
+            }
+          }
+        } else {
+          throw new Error(result.message || "Respon data tidak valid");
+        }
+      } catch (err) {
+        console.warn("Gagal menyinkronkan Google Sheets:", err);
+        if (!silent) {
+          showToast("Gagal mengambil data dari Google Sheets. Pastikan hak akses Apps Script adalah 'Anyone'.", "error");
+        }
+      } finally {
+        if (btnSync) {
+          btnSync.disabled = false;
+          btnSync.innerHTML = "🔄 Sinkron Sheets";
+        }
+      }
+    }
+
+    function openSheetsConfigModal() {
+      const modal = document.getElementById("modal-sheets-config");
+      const input = document.getElementById("input-sheets-url");
+      const currentUrl = getCurrentSheetUrl();
+
+      input.value = currentUrl;
+      updateModalStatusDisplay();
+      updateShareableStudentLink();
+
+      // Render kode Google Apps Script di preview code
+      const codeBlock = document.getElementById("apps-script-preview-code");
+      if (codeBlock) {
+        codeBlock.textContent = GOOGLE_APPS_SCRIPT_CODE;
+      }
+
+      modal.classList.add("active");
+    }
+
+    function closeSheetsConfigModal() {
+      document.getElementById("modal-sheets-config").classList.remove("active");
+    }
+
+    function updateModalStatusDisplay() {
+      const currentUrl = getCurrentSheetUrl();
+      const statusDot = document.getElementById("modal-status-dot");
+      const statusTitle = document.getElementById("modal-status-title");
+      const statusDesc = document.getElementById("modal-status-desc");
+      const btnOpenLive = document.getElementById("btn-open-live-sheet");
+
+      if (currentUrl && currentUrl.trim().length > 0) {
+        statusDot.style.background = "#10b981";
+        statusTitle.innerHTML = "Status: Terhubung ke Google Sheets 🟢";
+        statusDesc.innerHTML = "Setiap murid yang mengisi akan otomatis terekap ke spreadsheet online.";
+        if (btnOpenLive) btnOpenLive.style.display = "inline-block";
+      } else {
+        statusDot.style.background = "#94a3b8";
+        statusTitle.innerHTML = "Status: Belum Terhubung ⚪";
+        statusDesc.innerHTML = "Hasil murid baru tersimpan lokal di HP/browser murid masing-masing.";
+        if (btnOpenLive) btnOpenLive.style.display = "none";
+      }
+    }
+
+    function updateShareableStudentLink() {
+      const currentUrl = getCurrentSheetUrl();
+      const shareInput = document.getElementById("shareable-student-link");
+      const baseUrl = window.location.origin + window.location.pathname;
+
+      if (currentUrl && currentUrl.trim().length > 0) {
+        // Enkripsi atau masukkan query param agar browser murid otomatis mengenali Google Sheets
+        shareInput.value = `${baseUrl}?sheet=${encodeURIComponent(currentUrl)}`;
+      } else {
+        shareInput.value = baseUrl;
+      }
+    }
+
+    async function saveAndTestSheetsConnection() {
+      const input = document.getElementById("input-sheets-url");
+      const url = input.value.trim();
+
+      if (!url) {
+        showToast("Silakan masukkan URL Web App Google Apps Script terlebih dahulu.", "warning");
+        return;
+      }
+
+      if (!url.startsWith("https://script.google.com/macros/s/") || !url.endsWith("/exec")) {
+        if (!confirm("Peringatan: URL Apps Script biasanya berakhiran '/exec'. Apakah Anda yakin URL ini sudah benar?")) {
+          return;
+        }
+      }
+
+      showToast("Menguji koneksi ke Google Sheets...", "info", 2000);
+
+      try {
+        const res = await fetch(url, { method: "GET" });
+        const json = await res.json();
+
+        if (json && json.status === "success") {
+          localStorage.setItem(SHEET_URL_KEY, url);
+          updateSheetsBadgeStatus();
+          updateModalStatusDisplay();
+          updateShareableStudentLink();
+          showToast("✅ Berhasil! Google Sheets terhubung sempurna.", "success");
+          syncGoogleSheetsData(true);
+        } else {
+          throw new Error("Respon tidak valid");
+        }
+      } catch (err) {
+        if (confirm("Koneksi otomatis tidak merespons (" + err.message + "). Tetap simpan URL ini sebagai target penyimpanan?")) {
+          localStorage.setItem(SHEET_URL_KEY, url);
+          updateSheetsBadgeStatus();
+          updateModalStatusDisplay();
+          updateShareableStudentLink();
+          showToast("URL Google Sheets berhasil disimpan.", "info");
+        }
+      }
+    }
+
+    function disconnectSheets() {
+      if (confirm("Apakah Anda yakin ingin memutuskan sambungan Google Sheets?")) {
+        localStorage.removeItem(SHEET_URL_KEY);
+        document.getElementById("input-sheets-url").value = "";
+        updateSheetsBadgeStatus();
+        updateModalStatusDisplay();
+        updateShareableStudentLink();
+        showToast("Sambungan Google Sheets telah diputus.", "info");
+      }
+    }
+
+    function copyAppsScriptCode() {
+      navigator.clipboard.writeText(GOOGLE_APPS_SCRIPT_CODE).then(() => {
+        showToast("Kode Google Apps Script berhasil disalin ke clipboard!", "success");
+      }).catch(() => {
+        showToast("Gagal menyalin otomatis, silakan salin teks manual.", "warning");
+      });
+    }
+
+    function copyStudentLink() {
+      const shareInput = document.getElementById("shareable-student-link");
+      if (!shareInput || !shareInput.value) return;
+
+      navigator.clipboard.writeText(shareInput.value).then(() => {
+        showToast("Tautan untuk murid berhasil disalin! Siap dibagikan ke WhatsApp.", "success");
+      }).catch(() => {
+        shareInput.select();
+        document.execCommand("copy");
+        showToast("Tautan untuk murid berhasil disalin!", "success");
+      });
+    }
+
+    // Inisialisasi awal saat halaman dimuat
+    window.addEventListener("DOMContentLoaded", () => {
+      initSheetUrlFromQuery();
+    });
+    initSheetUrlFromQuery();
   </script>
 </body>
 </html>
